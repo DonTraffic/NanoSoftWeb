@@ -1,0 +1,38 @@
+.result{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10%;
+
+    &__title{
+        margin-bottom: 24px;
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        
+        list-style: none;
+        padding-left: 48px;
+    }
+
+    &-gecorate{
+        display: flex;
+        justify-content: end;
+    }
+
+    &__image{
+        height: calc(100% - 24px);
+        translate: -20%;
+
+        &-mask{
+            height: 100%;
+
+            display: flex;
+            align-items: end;
+
+            border-radius: 26px 0px 26px 0px;
+            background-color: color-white();
+        }
+    }
+}

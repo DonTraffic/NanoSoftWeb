@@ -1,0 +1,19 @@
+.company{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+
+    &__text{
+        max-width: 900px;
+        text-align: center;
+    }
+
+    &-line{
+        display: inline-block;
+        width: 50%;
+        height: 1px;
+        background-color: color-white();
+    }
+}

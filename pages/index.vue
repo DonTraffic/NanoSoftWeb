@@ -1,7 +1,10 @@
 <template>
-    <Header />
+    <Header></Header>
 
-    <h2>new page</h2>
+    <BlocksCompany></BlocksCompany>
+
+    <BlocksResult></BlocksResult>
+
 </template>
 
 <script setup>
