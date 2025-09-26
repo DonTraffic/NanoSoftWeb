@@ -1,0 +1,42 @@
+.listblockleft{
+    display: flex;
+    grid-template-columns: 3fr 1fr;
+    gap: 20%;
+
+    &__title{
+        margin-bottom: 24px;
+    }
+    
+    &__text{
+        max-width: 1000px;
+        text-align: left;
+        margin-bottom: 30px;
+        &-active{
+            color: color-black();
+            background-color: color-white();
+            max-height: 300px;
+        }
+    }
+
+    &__list{
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &-gecorate{
+        justify-content: end;
+    }
+
+    &__image{
+        height: calc(100% - 24px);
+        translate: -20%;
+
+        &-mask{
+            height: 100%;
+            align-items: end;
+
+            border-radius: 26px 0px 26px 0px;
+            background-color: color-white();
+        }
+    }
+}

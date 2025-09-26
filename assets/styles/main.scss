@@ -1,10 +1,8 @@
 @import 'variable.scss';
 
-@import './components/header.scss';
-@import './components/company.scss';
-@import './components/result.scss';
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+
+
 
 *{
     font-family: "Noto Sans SC", sans-serif;
@@ -38,12 +36,16 @@ body{
 .title{
     &-h1{
         font-size: $font-size-h1;
+        text-transform: uppercase;
     }
 
     &-h2{
         font-size: $font-size-h2;
-        line-height: 120%;
-        letter-spacing: 0%;
+        text-transform: uppercase;
+    }
+
+    &-h3{
+        font-size: $font-size-h3;
         text-transform: uppercase;
     }
 }
@@ -61,3 +63,100 @@ body{
         letter-spacing: 0%;
     }
 }
+
+.border{
+    border: 1px solid color-white();
+    border-radius: 26px 0px 26px 0px;
+}
+
+.corner{
+    position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    &-size{
+        height: 12px;
+        width: 12px;
+    }
+
+    &-left{
+        left: -26px;
+
+        &-inside{
+            left: calc(-26px + 14px);
+        }
+    }
+
+    &-right{
+        right: -26px;
+
+        &-inside{
+            right: calc(-26px + 14px);
+        }
+    }
+
+    &-top{
+        top: 0;
+    }
+
+    &-bottom{
+        bottom: 0;
+    }
+
+    &-black{
+        fill: color-black();
+        color: color-black();
+    }
+
+    &-white{
+        fill: color-white();
+        color: color-white();
+    }
+
+    &-rotate{
+        &-90{
+            rotate: 90deg;
+        }
+
+        &-180{
+            rotate: 180deg;
+        }
+
+        &-270{
+            rotate: 270deg;
+        }
+    }
+}
+
+.shadow{
+    position: absolute;
+    translate: -50% 0;
+    left: 50%;
+    height: 40px;
+    width: Calc(100% - 16px * 2);
+
+    transition: 1s ease;
+
+    &-top{
+        top: 0;
+        background: linear-gradient(0deg, color-white(0) 0%, color-white() 100%);
+    }
+
+    &-bottom{
+        bottom: 0;
+        background: linear-gradient(180deg, color-white(0) 0%, color-white() 100%);
+    }
+}
+
+.slider-line--transition, .scroll-thumb--transition{
+    transition: 1s ease
+}
+
+
+@import './components/header.scss';
+@import './components/company.scss';
+@import './components/result.scss';
+@import './components/companys.scss';
+@import './components/advantages.scss';
+@import './components/callback.scss';
