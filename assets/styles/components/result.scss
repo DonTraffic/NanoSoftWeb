@@ -3,8 +3,31 @@
     grid-template-columns: 3fr 1fr;
     gap: 10%;
 
+    @include tablet {
+        grid-template-columns: 80% 20%; 
+
+        .result{
+            &__image{
+                &-container{
+                    max-width: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @include phone {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
     &__title{
         margin-bottom: 24px;
+
+        @include phone {
+            margin-bottom: 16px;
+        }
     }
 
     &__list{
@@ -14,6 +37,10 @@
         
         list-style: none;
         padding-left: 48px;
+
+        @include phone {
+            padding-left: 0;
+        }
     }
 
     &-gecorate{
@@ -25,6 +52,11 @@
         height: calc(100% - 24px);
         translate: -20%;
 
+        @include phone {
+            height: 80%;
+            translate: 0 0;
+        }
+
         &-mask{
             height: 100%;
 
@@ -33,6 +65,10 @@
 
             border-radius: 26px 0px 26px 0px;
             background-color: color-white();
+
+            @include phone {
+                justify-content: center;
+            }
         }
     }
 }

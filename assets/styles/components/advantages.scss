@@ -1,7 +1,4 @@
 .advantages {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 5%;
 
     * {
         color: color-black();
@@ -20,8 +17,13 @@
     &-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        gap: 5%;
+        grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 26px;
+
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+        }
     }
 
 
@@ -42,9 +44,10 @@
         }
 
         &-image {
-            border: 6px solid color-white();
+            border: 6px solid color-bodily();
             position: relative;
-            color: color-white();
+            color: color-black();
+            background-color: color-bodily();
             border-style: solid;
 
             display: flex;
@@ -69,8 +72,12 @@
                 text-align: center;
                 justify-content: center;
                 width: calc(100% - 160px);
-                color: color-white();
+                color: color-black();
                 transition: .4s ease;
+            }
+
+            @include phone {
+                height: 150px;
             }
 
         }

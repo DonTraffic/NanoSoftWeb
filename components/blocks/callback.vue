@@ -1,7 +1,7 @@
 <template>
     <section class="callback wrapper">
         <h2 class="callback__title title-h2">Обратная связь</h2>
-        <p class="callback__text text-big">Мы свяжемся с вами в течение 15 минут!</p>
+        <p class="callback__text text-big">Мы свяжемся с вами в течение <span class="text-bodily">15 минут</span>!</p>
 
         <div class="callback-container">
             <div class="callback__image">
@@ -35,11 +35,7 @@
                         Написать
                     </button>
                 </div>
-                <button
-                    @click="(e) => {e.preventDefault(); selectedOption = 'sms'}"
-                    :class="{ active: selectedOption === 'sms' }"
-                    class="callback__form-button"
-                >
+                <button class="callback__form-submit">
                     Получить обратную связь
                 </button>
             </form>
@@ -48,5 +44,5 @@
 </template>
 
 <script setup>
-    const selectedOption = ref(null)
+    const selectedOption = ref('tel')
 </script>

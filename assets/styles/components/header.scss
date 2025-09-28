@@ -6,6 +6,7 @@
     color: color-white();
 
     &__menu{
+        width: max-content;
         position: absolute;
         top: 0;
         left: 50%;
@@ -17,7 +18,7 @@
             border: none;
             border-bottom: 1px solid color-white(0.5);
 
-            tab-size: $font-size-text;
+            font-size: $font-size-text;
             text-transform: uppercase;
             padding: 8px 16px;
 
@@ -28,6 +29,10 @@
                 border-bottom: 1px solid color-orange();
                 cursor: pointer;
             }
+        }
+
+        @include tablet{
+            display: none;
         }
     }
 
@@ -52,7 +57,8 @@
     }
 
     &__logo{
-        width: 600px;
+        max-width: 600px;
+        width: 100%;
     }
 
     &__title{
@@ -62,14 +68,26 @@
 
         font-size: $font-size-h1;
 
+        @include laptop {
+            font-size: $font-size-h2;  
+        }
+
         &-container{
             display: flex;
             align-items: center;
             gap: 4px;
+
+            @include laptop {
+                flex-direction: column;  
+            }
         }
 
         &-text{
             min-width: fit-content;
+
+            &--mobile{
+                display: none;
+            }
         }
 
         &-transfer{
@@ -92,4 +110,78 @@
             }
         }
     }
+
+    @include laptop {
+        &-container{
+            width: calc(100% - 16px * 2);
+        }
+
+        &__subtitle{
+            margin-bottom: 8px;
+        }
+
+        &__title{
+            &-text{
+                display: none;
+
+                &--mobile{
+                    display: block;
+                    text-align: center;
+                    margin-bottom: 64px;
+                }
+            }
+        }
+    }
 }
+
+
+
+
+
+// .header {
+//     position: relative;
+//     width: 100%;
+//     z-index: 50;
+  
+//     &__menu {
+//       display: flex;
+//       justify-content: center;
+//       gap: 20px;
+//       background: color-black();
+//       transition: all 0.3s ease;
+//       z-index: 100;
+  
+//     //   &-btn {
+//     //     padding: 10px 15px;
+//     //     font-size: 14px;
+//     //     font-weight: 500;
+//     //     color: #333;
+//     //     background: transparent;
+//     //     border: none;
+//     //     cursor: pointer;
+//     //     transition: color 0.2s;
+  
+//     //     &:hover {
+//     //       color: #007aff; // активный цвет
+//     //     }
+//     //   }
+//     }
+  
+//     // &-container {
+//     //   padding: 100px 20px 40px;
+//     //   text-align: center;
+//     // }
+//   }
+  
+// /* состояния */
+// .fixed {
+//     position: fixed;
+//     // max-width: $max-width-content;
+//     width: 100%;
+//     top: 0;
+//     left: 50%;
+// }
+  
+// .relative {
+//     position: relative;
+// }

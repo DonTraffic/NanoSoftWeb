@@ -87,6 +87,8 @@ function scrollButton(data, direction) {
 }
 
 function sliderTouch(event, type, data, elem, index) {
+    event.preventDefault()
+    
     let elemDinamic = elem == 'slider' ? 
         (index ? data.sliders[index] : data.sliders[0]) : data.scroll
     let clientY = type == 'mouse' ? event.clientY : event.touches[0].clientY ;

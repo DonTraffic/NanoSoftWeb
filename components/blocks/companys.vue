@@ -1,15 +1,17 @@
 <template>
   <section class="companys">
-    <div class="listCompanys">
+    <!-- <div id="cases" class="listCompanys wrapper">
       <div class="listCompanys__header">
-        <h2 class="listCompanys__header-title title-h2">сделай ваш бизнес реальным</h2>
+        <h2 class="listCompanys__header-title title-h2">Сделаем ваш бизнес реальным</h2>
         <p class="listCompanys__header-text text-big">Уже множество клиентов выбрали именно нас! <br> Дак почему ты ещё не выбрал ?</p>
       </div>
 
       <div 
         id="listCompanys"
-        class="DTScroll slider listCompanys-slider listCompanys__slider" 
+        class="DTScroll slider listCompanys-slider listCompanys__slider"
+        points='{"0":5, "1024": 4, "768": 3, "425": 1}'
         touche="true"
+        anchor="true"
       >
 
         <div class="listCompanys-line listCompanys__line">
@@ -25,11 +27,8 @@
             >
           </div>
         </div>
-
-        <div class="listCompanysPopup-shadow-prev listCompanys__popup-content-company-shadow listCompanys__popup-content-company-shadow--top shadow shadow-left"></div>
-        <div class="listCompanysPopup-shadow-next listCompanys__popup-content-company-shadow listCompanys__popup-content-company-shadow--bottom shadow shadow-right"></div>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="mapCompanys">
@@ -40,11 +39,11 @@
         <div class="mapCompanys__block mapCompanys__block--top">
           <h2 class="mapCompanys__block-title title-h2">КОМПАНИИ, КОТОРЫЕ НАМ ДОВЕРЯЮТ</h2>
           
-          <svg class="mapCompanys__block-corner corner corner-black corner-left corner-top corner-rotate-180">
+          <svg class="mapCompanys__block-corner corner corner-black corner-left corner-top-inside corner-rotate-180">
             <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
           </svg>
 
-          <svg class="mapCompanys__block-corner corner corner-black corner-right corner-top corner-rotate-90">
+          <svg class="mapCompanys__block-corner corner corner-black corner-right-outside corner-bottom-outside corner-rotate-180">
             <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
           </svg>
         </div>
@@ -56,80 +55,72 @@
             <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
           </svg>
 
-          <svg class="mapCompanys__block-corner corner corner-black corner-right corner-bottom corner-rotate-0">
+          <svg class="mapCompanys__block-corner corner corner-black corner-right-outside corner-top corner-rotate-270">
             <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
           </svg>
         </div>
 
+        <div 
+          id="listCompanys"
+          class="DTScroll slider listCompanys-slider listCompanys__slider"
+          points='{"0":5}'
+          direction="vertical"
+          touche="true"
+          anchor="true"
+        >
+
+          <svg class="listCompanys-corner corner corner-black corner-right corner-top-inside corner-rotate-90">
+            <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
+          </svg>
+
+          <svg class="listCompanys-corner corner corner-black corner-right corner-bottom corner-rotate-0">
+            <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
+          </svg>
+
+          <div class="listCompanys-line listCompanys__line">
+            <div 
+              class="listCompanys-item listCompanys__item"
+              v-for="(organization, key) in organizations" :key="key"
+              @click="flyTo(organization.coords, key)"
+            >
+              <img
+                class="listCompanys__item-img"
+                :src="`/images/companys/${organization.name}.png`"
+                :alt="'organization-' + organization.name"
+              >
+            </div>
+          </div>
+        </div>
+
         <div v-show="selectedOrg" class="mapCompanys__popup">
-          <div v-if="selectedOrg" class="mapCompanys__popup-block mapCompanys__popup-block-top title-h3">
-            {{ selectedOrg.titleCompany }}
+          <div 
+            id="mapCompanysPopup"
+            class="DTScroll slider mapCompanysPopup-slider mapCompanys__popup-container" 
+            direction="vertical"
+            touche="true"
+          >
+            <div class="mapCompanysPopup-line mapCompanys__popup-content">
+              <div class="mapCompanysPopup-item mapCompanys__popup-content-item">
+                <p v-if="selectedOrg" class="mapCompanys__popup-content-item-title title-h3">{{ selectedOrg.titleCompany }}</p>
+                
+                <img
+                  v-if="selectedOrg"
+                  class="mapCompanys__popup-content-img"
+                  :src="`/images/companys/${selectedOrg.name}.png`"
+                  :alt="'marker-' + selectedOrg.name"
+                >
 
-            <svg class="mapCompanys__block-corner corner corner-black corner-right corner-bottom corner-rotate-0">
-              <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
-            </svg>
+                <p v-if="selectedOrg" class="mapCompanys__popup-content-text text-medium" v-html="selectedOrg.textCompany"></p>
 
-            <svg class="mapCompanys__block-corner corner corner-size corner-white corner-right-inside corner-bottom corner-rotate-0">
-              <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
-            </svg>
-          </div>
+                <br>
 
-          <div class="mapCompanys__popup-content">
-            <div 
-              id="mapCompanysPopup"
-              class="DTScroll slider mapCompanysPopup-slider mapCompanys__popup-content-container" 
-              direction="vertical"
-              touche="true"
-            >
-              <div class="mapCompanysPopup-line mapCompanys__popup-content-company">
-                <div class="mapCompanysPopup-item mapCompanys__popup-content-company-item">
-                  <img
-                    v-if="selectedOrg"
-                    class="mapCompanys__popup-content-company-img"
-                    :src="`/images/companys/${selectedOrg.name}.png`"
-                    :alt="'marker-' + selectedOrg.name"
-                  >
-
-                  <p v-if="selectedOrg" class="mapCompanys__popup-content-company-text text-medium" v-html="selectedOrg.textCompany"></p>
-                </div>
+                <p v-if="selectedOrg" class="mapCompanys__popup-content-additionally-text title-h3">{{ selectedOrg.title }}</p>
+                <p v-if="selectedOrg" class="mapCompanys__popup-content-additionally-text text-medium" v-html="selectedOrg.text"></p>
               </div>
-
-              <div class="mapCompanysPopup-shadow-prev mapCompanys__popup-content-company-shadow mapCompanys__popup-content-company-shadow--top shadow shadow-top"></div>
-              <div class="mapCompanysPopup-shadow-next apCompany__popup-content-company-shadow mapCompanys__popup-content-company-shadow--bottom shadow shadow-bottom"></div>
-            </div>
-
-            <div class="mapCompanysPopup-scroll mapCompanys__popup-content-scroll">
-              <div class="mapCompanysPopup-thumb mapCompanys__popup-content-scroll-thumb"></div>
-            </div>
-
-            <div 
-              class="mapCompanysPopup-slider mapCompanysPopup-slider--1 mapCompanys__popup-content-desc" 
-              direction="vertical"
-              touche="true"
-            >
-              <div class="mapCompanysPopup-line mapCompanys__popup-content-desc-line">
-                <div class="mapCompanysPopup-item mapCompanys__popup-content-desc-item">
-                  <p v-if="selectedOrg" class="mapCompanys__popup-content-desc-title title-h3">{{ selectedOrg.title }}</p>
-                  <p v-if="selectedOrg" class="mapCompanys__popup-content-desc-text text-medium" v-html="selectedOrg.text"></p>
-                </div>
-              </div>
-
-              <div class="mapCompanysPopup-shadow-prev mapCompanys__popup-content-desc-shadow mapCompanys__popup-content-desc-shadow--top shadow shadow-top"></div>
-              <div class="mapCompanysPopup-shadow-next mapCompanys__popup-content-desc-shadow mapCompanys__popup-content-desc-shadow--bottom shadow shadow-bottom"></div>
             </div>
           </div>
 
-          <div class="mapCompanys__popup-block mapCompanys__popup-block-bottom mapCompanys__popup-closed text-big" @click="closePopup">
-            Закрыть
-
-            <svg class="mapCompanys__block-corner corner corner-black corner-left corner-top corner-rotate-180">
-              <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
-            </svg>
-
-            <svg class="mapCompanys__block-corner corner corner-size corner-white corner-left-inside corner-top corner-rotate-180">
-              <use xlink:href="@/assets/sprites/sprite.svg#corner"></use>
-            </svg>
-          </div>
+          <button class="mapCompanys__popup-closed text-medium" @click="closePopup">Закрыть</button>
         </div>
       </div>
     </div>
@@ -165,7 +156,7 @@ function createMarkerStyle(src) {
     image: new Icon({
       anchor: [0.5, 1],
       src,
-      scale: 0.07
+      scale: 1.25
     })
   })
 }
@@ -242,7 +233,7 @@ function closePopup() {
 function flyTo(coords, key) {
   selectOrg(key)
   const duration = 2000
-  const zoom = 14
+  const zoom = 10
   const target = fromLonLat(coords)
 
   view.animate(
